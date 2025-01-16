@@ -55,19 +55,22 @@ We will be creating a Node.js server for uploading, processing, and visualizing 
     
     # Verify Node.js and npm installation
     RUN node -v && npm -v
+    
+    # Create an application directory
+    WORKDIR /app
+    
+    # Generate a package.json file
+    RUN npm init -y
+    
+    # Install required dependencies
+    RUN npm install express multer csv-parser formidable json2csv
     ````
-  ![dockerfile_definition](images/dockerfile_data_cleaner.png)
-- Scroll to the `Pre-Run Scripts` section and update the below commands to install the required dependencies at runtime.
-    ````
-    npm install formidable json2csv csv-parser
-    ````
-  ![pre-run_scripts](images/pre-run-scripts.png)
 
 - Further instructions on how to build a new environment can be found [here](https://docs.dominodatalab.com/en/5.11/user_guide/5dd2c1/edit-environment-definition/).
 
 ## Steps to Test the App in a Workspace
 
--  Launch a workspace using the environment updated above and copy the `Data-Cleaning-Assistant` directory and `app.sh` files to the workspace as seen below. You should also see `node_modules` directory which should include all the dependencies installed through the `pre-run script`.
+-  Launch a workspace using the environment updated above and copy the `Data-Cleaning-Assistant` directory and `app.sh` files to the workspace as seen below. You should also see `node_modules` directory which should include all the dependencies installed.
 
    ![workspace_content](images/workspace_content.png)
   - Navigate to the `Data-Cleaning-Assistant` directory and edit line 26 and 28. Change <domain> to the domain of your Domino deployment.
@@ -81,7 +84,9 @@ We will be creating a Node.js server for uploading, processing, and visualizing 
 
 - Open a new terminal and execute the `server.js` script and pass in the `develop` argument since its being tested in the workspace. You should see a similar screenshot below that indicates that Javascript app is running on port 8887.
   
-    `node Data-Cleaning-Assistant/server.js develop`
+    ```
+    node Data-Cleaning-Assistant/server.js develop
+    ```
 
 - You should see an output similar to the below which indicates that the App is running on port 8887
   
@@ -107,9 +112,16 @@ We will be creating a Node.js server for uploading, processing, and visualizing 
 
 # Steps to run the Javascript through Domino Web App
 
-After you have tested and confirmed that the Javascript app is working as expected, you can go ahead and run the App in your project. Navigate to the App section of your project and click on publish.
+After you have tested and confirmed that the Javascript app is working as expected.
 
-![javascript_web_app](images/javascript_web-app.png)
+- Ensure your `app.sh` now contains the `deploy` argument since this is now going to be tested in the Web App.
+  **Content of app.sh**
+  ```
+  node Data-Cleaning-Assistant/server.js deploy
+  ```
+- Run the Web App in your project. Navigate to the App section of your project and click on publish.
+
+    ![javascript_web_app](images/javascript_web-app.png)
 
 - Once the web app is running, click on View App and you should be able to see the same Javascript App as seen below.
 
