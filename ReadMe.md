@@ -77,7 +77,7 @@ We will be creating a Node.js server for uploading, processing, and visualizing 
     } else {
       return `https://<domain>/${process.env.DOMINO_PROJECT_OWNER}/${process.env.DOMINO_PROJECT_NAME}/r/notebookSession/${process.env.DOMINO_RUN_ID}/`;
       ```
-  ![change_domain](images/change-domain.png)  
+  ![change_domain](images/change-domain.png)
 
 - Open a new terminal and execute the `server.js` script and pass in the `develop` argument since its being tested in the workspace. You should see a similar screenshot below that indicates that Javascript app is running on port 8887.
   
