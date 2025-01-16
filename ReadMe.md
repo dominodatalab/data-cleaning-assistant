@@ -28,7 +28,7 @@ We will be creating a Node.js server for uploading, processing, and visualizing 
 ### 5. 404 Handling
 - Responds with a "Not Found" message for unrecognized routes.
 
-#### Dependencies
+#### Dependencies:
 - **http:** Built-in Node.js module for creating the server.
 - **formidable:** For handling file uploads.
 - **csv-parser:** For parsing CSV files.
